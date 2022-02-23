@@ -1,15 +1,27 @@
 package models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "folders")
 public class Folder {
-    private String title;
-    private Long id;
-    private ArrayList<File> files;
 
-    public Folder(String title) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "title")
+    private String title;
+
+    private List<File> files;
+
+    private User user;
+
+    public Folder(String title, User user) {
         this.title = title;
-        this.files = new ArrayList<>();
+        this.user = user;
     }
 
     public Folder() {
@@ -31,7 +43,7 @@ public class Folder {
         this.id = id;
     }
 
-    public ArrayList<File> getFiles() {
+    public List<File> getFiles() {
         return files;
     }
 
